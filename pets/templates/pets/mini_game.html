@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mini Game</title>
+
+    <link rel="stylesheet" href="{% static 'pets/style.css' %}">
+</head>
+
+<body>
+
+    <div class="game-container">
+
+        <h1>🎮 Mini Game</h1>
+
+        <div class="pet-card">
+
+            <div class="pet-image">
+                🎯
+            </div>
+
+            <h2>Guess the Number!</h2>
+
+            <p>
+                {{ pet.name }} has chosen a number between
+                <strong>1 and 5</strong>.
+            </p>
+
+            <p>Guess correctly and win <strong>30 coins!</strong> 🪙</p>
+
+            {% if result %}
+                <div class="game-result">
+                    {{ result }}
+                </div>
+            {% endif %}
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <select name="guess" required>
+                    <option value="">Choose a number</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+
+                <br><br>
+
+                <button type="submit">
+                    🎯 Guess
+                </button>
+
+            </form>
+
+            <br>
+
+            <div class="coins">
+                🪙 Coins: {{ pet.coins }}
+            </div>
+
+            <a href="{% url 'dashboard' pet.id %}">
+                <button type="button">
+                    ⬅ Back to Pet
+                </button>
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

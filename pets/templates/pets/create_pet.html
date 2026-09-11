@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Pet</title>
+</head>
+<body>
+
+    <h1>🐾 Create Your Pet</h1>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <label>Pet Name:</label>
+        <input type="text" name="name" placeholder="Enter pet name" required>
+
+        <br><br>
+
+        <label>Choose Pet:</label>
+
+        <select name="pet_type" required>
+            <option value="">-- Select --</option>
+            <option value="dog">🐶 Dog</option>
+            <option value="cat">🐱 Cat</option>
+            <option value="rabbit">🐰 Rabbit</option>
+        </select>
+
+        <br><br>
+
+        <button type="submit">Create Pet 🐾</button>
+
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ pet.name }} - Virtual Pet</title>
+    <link rel="stylesheet" href="{% static 'pets/style.css' %}">
+</head>
+
+<body>
+
+<div class="game-container">
+
+    <h1>🐾 Virtual Pet</h1>
+
+    <div class="pet-card">
+
+        <div class="pet-image">
+            {% if pet.pet_type == 'dog' %}
+                🐶
+            {% elif pet.pet_type == 'cat' %}
+                🐱
+            {% elif pet.pet_type == 'rabbit' %}
+                🐰
+            {% endif %}
+        </div>
+
+        <h2>{{ pet.name }}</h2>
+        <div class="mood">
+            Mood: {{ mood }}
+        </div>
+
+         <div class="health">
+            ❤️ Health: {{ health }}%
+            <br>
+            <span>{{ health_status }}</span>
+        </div>
+
+        <div class="stats">
+
+            <!-- Hunger -->
+            <div class="stat">
+                <div class="stat-label">
+                    <span>🍖 Hunger</span>
+                    <span>{{ pet.hunger }}%</span>
+                </div>
+
+                <div class="bar">
+                    <div class="bar-fill hunger"
+                         style="width: {{ pet.hunger }}%;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Happiness -->
+            <div class="stat">
+                <div class="stat-label">
+                    <span>❤️ Happiness</span>
+                    <span>{{ pet.happiness }}%</span>
+                </div>
+
+                <div class="bar">
+                    <div class="bar-fill happiness"
+                         style="width: {{ pet.happiness }}%;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Energy -->
+            <div class="stat">
+                <div class="stat-label">
+                    <span>⚡ Energy</span>
+                    <span>{{ pet.energy }}%</span>
+                </div>
+
+                <div class="bar">
+                    <div class="bar-fill energy"
+                         style="width: {{ pet.energy }}%;">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Coins -->
+        <div class="coins">
+            🪙 Coins: {{ pet.coins }}
+        </div>
+
+        <h3>What should {{ pet.name }} do?</h3>
+
+        <!-- Actions -->
+        <div class="actions">
+
+            <a href="{% url 'feed_pet' pet.id %}">
+                <button type="button">🍖 Feed</button>
+            </a>
+
+            <a href="{% url 'play_pet' pet.id %}">
+                <button type="button">🎮 Play</button>
+            </a>
+
+            <a href="{% url 'sleep_pet' pet.id %}">
+                <button type="button">😴 Sleep</button>
+            </a>
+
+            <a href="{% url 'pet_pet' pet.id %}">
+                <button type="button">❤️ Pet</button>
+            </a>
+
+            <a href="{% url 'shop' pet.id %}">
+                 <button type="button">🛒 Shop</button>
+            </a>
+
+            <a href="{% url 'mini_game' pet.id %}">
+                <button type="button">🎯 Mini Game</button>
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

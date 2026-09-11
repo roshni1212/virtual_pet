@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pet Shop</title>
+
+    <link rel="stylesheet" href="{% static 'pets/style.css' %}">
+</head>
+
+<body>
+
+    <div class="game-container">
+
+        <h1>🛒 Pet Shop</h1>
+
+        <div class="coins">
+            🪙 Your Coins: {{ pet.coins }}
+        </div>
+
+        {% if message %}
+        <div class="message {{ message_type }}">
+        {{ message }}
+        </div>
+        {% endif %}
+
+        <div class="shop-items">
+
+            {% for item in items %}
+
+            <div class="shop-item">
+
+                <h2>{{ item.name }}</h2>
+
+                <p>🪙 Price: {{ item.price }} coins</p>
+
+                {% if item.hunger_boost > 0 %}
+                    <p>🍖 Hunger +{{ item.hunger_boost }}</p>
+                {% endif %}
+
+                {% if item.happiness_boost > 0 %}
+                    <p>❤️ Happiness +{{ item.happiness_boost }}</p>
+                {% endif %}
+
+                {% if item.energy_boost > 0 %}
+                    <p>⚡ Energy +{{ item.energy_boost }}</p>
+                {% endif %}
+
+                <a href="{% url 'buy_item' pet.id item.id %}">
+                    <button type="button">
+                        Buy 🪙
+                    </button>
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <br>
+
+        <a href="{% url 'dashboard' pet.id %}">
+            <button type="button">⬅ Back to Pet</button>
+        </a>
+
+    </div>
+
+</body>
+</html>
